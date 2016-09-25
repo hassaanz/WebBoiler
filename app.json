@@ -1,0 +1,10 @@
+{
+  "name": "Graana",
+  "description": "Graana.com Web Application",
+  "repository": "https://github.com/graana/graana-web",
+  "logo": "https://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "express", "static", "react", "webpack", "mongodb"],
+  "addons" : [
+  	"mongohq"
+  ]
+}
