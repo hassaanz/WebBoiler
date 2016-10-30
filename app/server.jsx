@@ -8,6 +8,8 @@ import configureStore from 'store/configureStore';
 import preRenderMiddleware from 'middlewares/preRenderMiddleware';
 import header from 'components/Meta';
 
+global.navigator = { userAgent: 'all' };
+
 const clientConfig = {
   host: process.env.HOSTNAME || 'localhost',
   port: process.env.PORT || '3000'
@@ -18,7 +20,7 @@ axios.defaults.baseURL = `http://${clientConfig.host}:${clientConfig.port}`;
 
 
 const analtyicsScript =
-  typeof trackingID === "undefined" ? ``
+  typeof trackingID === 'undefined' ? ''
   :
   `<script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -39,10 +41,7 @@ const analtyicsScript =
  * however the assignement  does not, so it is undefined for the type check above.
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting
  */
-const trackingID  = "'UA-########-#'";
-
-
-
+const trackingID = "'UA-########-#'";
 
 /*
  * Export render function to be used in server/config/routes.js

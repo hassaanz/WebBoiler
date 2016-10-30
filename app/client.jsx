@@ -3,10 +3,6 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import createRoutes from './routes';
 import configureStore from './store/configureStore';
@@ -18,7 +14,7 @@ const initialState = window.__INITIAL_STATE__;
 const store = configureStore(initialState, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);
 const routes = createRoutes(store);
-injectTapEventPlugin();
+
 /**
  * Callback function handling frontend route changes.
  */
@@ -29,6 +25,7 @@ function onUpdate() {
   // We set it to null so that every subsequent client-side navigation will
   // still trigger a fetch data.
   // Read more: https://github.com/choonkending/react-webpack-node/pull/203#discussion_r60839356
+
   if (window.__INITIAL_STATE__ !== null) {
     window.__INITIAL_STATE__ = null;
     return;
@@ -43,10 +40,10 @@ function onUpdate() {
 // Router converts <Route> element hierarchy to a route config:
 // Read more https://github.com/rackt/react-router/blob/latest/docs/Glossary.md#routeconfig
 render(
-  <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-    <Provider store={store}>
+  <Provider store={store}>
+    <div>
       <Router history={history} onUpdate={onUpdate}>
         {routes}
       </Router>
-    </Provider>
-  </MuiThemeProvider>, document.getElementById('app'));
+    </div>
+  </Provider>, document.getElementById('app'));
